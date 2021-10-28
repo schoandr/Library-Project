@@ -31,14 +31,18 @@ function getMostCommonGenres(books) {
   return sorted.slice(0,5)
 }
 
+function sortAndSliceHelper(array) {
+  array.sort((prev, curr) => curr.count - prev.count)
+  return array.slice(0, 5)
+}
+
 function getMostPopularBooks(books) {
   const mostPopular = books.map(book => {
     const count = book.borrows.length
     const name = book.title
     return {name, count}
   })
-  mostPopular.sort((prev, curr) => curr.count - prev.count)
-  return mostPopular.slice(0, 5)
+  return sortAndSliceHelper(mostPopular)
 }
 
 function getMostPopularAuthors(books, authors) {
@@ -48,9 +52,7 @@ function getMostPopularAuthors(books, authors) {
     const count = book.borrows.length
     return {name, count}
   })
-  popularAuthor.sort((prev, curr) => curr.count - prev.count)
-  console.log(popularAuthor)
-  return popularAuthor.slice(0, 5)
+  return sortAndSliceHelper(popularAuthor)
 }
 
 module.exports = {
